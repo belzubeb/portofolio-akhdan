@@ -159,7 +159,7 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <div id="pv" ref={pv} className={hover ? "on" : ""}>{hover && <Cover p={hover} />}</div>
+      <div id="pv" ref={pv} className={hover ? "on" : ""}>{hover && <><Cover p={hover} /><span className="cap">{hover.category} · {hover.year}</span></>}</div>
 
       <div id="scene" ref={scene} className={cur ? "open" : ""} style={{ "--sbg": last.bg, "--sfg": last.fg } as CSSProperties}>
         <div key={last.slug}>
@@ -174,10 +174,10 @@ export default function Portfolio() {
             {last.link
               ? <a className="btn" href={last.link} target="_blank" rel="noopener noreferrer">{last.link.includes("github") ? "View source" : "Visit live site"} ↗</a>
               : <span className="btn off">Private project</span>}
-            {last.demo === "neo" ? <NeoDemo />
-              : last.gallery.length
-                ? last.gallery.map((g) => <div className="fr rv" key={g}><div className="tb"><i /><i /><i /></div><img src={g} alt={last.title} /></div>)
-                : <div className="fr"><div className="soon">Screenshots coming soon</div></div>}
+            {last.demo === "neo" && <NeoDemo />}
+            {last.gallery.length > 0 && (last.device === "phone"
+              ? <div className="phones">{last.gallery.map((g) => <div className="phone rv" key={g}><img src={g} alt={`${last.title} screen`} /></div>)}</div>
+              : last.gallery.map((g) => <div className="fr rv" key={g}><div className="tb"><i /><i /><i /></div><img src={g} alt={last.title} /></div>))}
           </div>
           <a className="nx" style={{ "--nbg": nx.bg, "--nfg": nx.fg } as CSSProperties} onClick={(e) => open(nx.slug, e)}>
             <div className="wrap"><small>Next project</small><h2 className="d">{nx.title}</h2></div>
