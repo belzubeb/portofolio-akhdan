@@ -946,3 +946,10 @@ td {
   color: #fff;
   background: linear-gradient(transparent, rgba(0, 0, 0, .7))
 }
+
+/* contact tanpa email */
+.ct h2.d {
+  font-size: clamp(30px, 6vw, 84px);
+  margin: 16px auto 28px;
+  max-width: 980px
+}

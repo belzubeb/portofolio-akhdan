@@ -6,7 +6,7 @@ import { projects as P, type Project } from "@/data/projects";
 import { SITE } from "@/lib/site";
 import NeoDemo from "./NeoDemo";
 
-const STACK = ["Next.js", "React", "Laravel", "WordPress", "Tailwind CSS", "REST API", "Firebase", "Android", "MySQL"];
+const STACK = ["Next.js", "React", "Laravel", "WordPress", "Tailwind CSS", "REST API", "SEO", "Firebase", "Android", "MySQL"];
 const pad = (n: number) => String(n).padStart(2, "0");
 
 function Cover({ p }: { p: Project }) {
@@ -125,8 +125,8 @@ export default function Portfolio() {
               <span className="ln"><span>built end to end.</span></span>
             </h1>
             <div className="sub">
-              <p>Interfaces, flows and systems for events, reservations, internal operations and company sites. Shipped with Next.js, React, Laravel and WordPress.</p>
-              <p>Web Developer · {SITE.since} – now</p>
+              <p>Websites, web apps and internal systems for events, reservations, clinics and industry, with SEO built in from day one.</p>
+              <p>Web development · SEO</p>
             </div>
           </div>
           <div className="mq"><div>{Array(4).fill(0).map((_, k) => STACK.map((s) => <span key={k + s}>{s}<i>✦</i></span>))}</div></div>
@@ -134,7 +134,7 @@ export default function Portfolio() {
 
         <section className="s" id="work"><div className="wrap">
           <div className="sh rv"><h2 className="d">Selected Work</h2>
-            <p>Hover to preview, click to open a project. Six builds, from live products to private systems.</p></div>
+            <p>Hover to preview, click to open a project. {P.length} builds, from live products to private systems.</p></div>
           <div id="list" onMouseLeave={() => setHover(null)}>
             {P.map((p, k) => (
               <div key={p.slug}>
@@ -149,16 +149,17 @@ export default function Portfolio() {
         </div></section>
 
         <section className="s" id="about"><div className="wrap ab">
-          <p className="rv">I build the parts people actually touch: fast interfaces, clear flows, and the integrations that make them work.</p>
+          <p className="rv">We build the parts people actually touch: fast interfaces, clear flows, and the integrations that make them work. Every site ships ready to be found.</p>
           <ul className="rv">
             <li>Frontend<span>Next.js · React · Tailwind CSS</span></li><li>Backend<span>Laravel · REST API · MySQL</span></li>
-            <li>CMS<span>WordPress</span></li><li>Mobile<span>Android · Firebase</span></li>
+            <li>CMS<span>WordPress</span></li><li>Mobile<span>Android · Firebase</span></li><li>Digital<span>Web + SEO packages</span></li>
           </ul></div></section>
 
         <section className="s ct" id="contact">
-          <div className="wrap rv"><small style={{ color: "var(--mut)" }}>Have a project in mind?</small><br />
-            <a className="d" href={`mailto:${SITE.email}`}>{SITE.email}</a></div>
-          <div className="wrap"><footer><span>© {new Date().getFullYear()} {SITE.name}</span>
+          <div className="wrap rv"><small style={{ color: "var(--mut)" }}>Websites that look sharp and get found</small>
+            <h2 className="d">Web + SEO packages for your next project.</h2>
+            {SITE.contactUrl && <a className="d" href={SITE.contactUrl} target="_blank" rel="noopener noreferrer">Let’s talk ↗</a>}</div>
+          <div className="wrap"><footer><span>{SITE.credit} · © {new Date().getFullYear()}</span>
             <button onClick={() => go("hero")}>Back to top ↑</button></footer></div>
         </section>
       </main>
