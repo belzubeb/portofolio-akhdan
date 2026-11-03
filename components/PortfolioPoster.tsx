@@ -166,7 +166,16 @@ export default function PortfolioPoster() {
         <section data-sec id="ct" className={`${s.sec} ${s.ct2}`}>
           <div className={s.w}>
             <h2>Let’s build<br />something.</h2>
-            <a className={s.mail} href={`mailto:${SITE.email}`}>{SITE.email}</a>
+            {SITE.contactUrl && (
+              <a
+                className={s.mail}
+                href={SITE.contactUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Let’s talk ↗
+              </a>
+            )}
             <div className={s.bt}>
               <a className={s.b} href="https://github.com/belzubeb" target="_blank" rel="noopener noreferrer">GitHub</a>
               <a className={s.b} href="https://linkedin.com/in/akhdannajib" target="_blank" rel="noopener noreferrer">LinkedIn</a>
