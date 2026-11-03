@@ -18,6 +18,10 @@ function Cover({ p }: { p: Project }) {
   );
 }
 
+function Frame({ src, alt }: { src: string; alt: string }) {
+  return <div className="fr rv"><div className="tb"><i /><i /><i /></div><img src={src} alt={alt} loading="lazy" /></div>;
+}
+
 function reveal(root: Element | null, scope: ParentNode) {
   const io = new IntersectionObserver(
     (es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
@@ -159,7 +163,7 @@ export default function Portfolio() {
         </section>
       </main>
 
-      <div id="pv" ref={pv} className={hover ? "on" : ""}>{hover && <Cover p={hover} />}</div>
+      <div id="pv" ref={pv} className={hover ? "on" : ""}>{hover && <><Cover p={hover} /><span className="cap">{hover.category} · {hover.year}</span></>}</div>
 
       <div id="scene" ref={scene} className={cur ? "open" : ""} style={{ "--sbg": last.bg, "--sfg": last.fg } as CSSProperties}>
         <div key={last.slug}>
@@ -174,10 +178,19 @@ export default function Portfolio() {
             {last.link
               ? <a className="btn" href={last.link} target="_blank" rel="noopener noreferrer">{last.link.includes("github") ? "View source" : "Visit live site"} ↗</a>
               : <span className="btn off">Private project</span>}
-            {last.demo === "neo" ? <NeoDemo />
-              : last.gallery.length
-                ? last.gallery.map((g) => <div className="fr rv" key={g}><div className="tb"><i /><i /><i /></div><img src={g} alt={last.title} /></div>)
-                : <div className="fr"><div className="soon">Screenshots coming soon</div></div>}
+            {last.highlights.length > 0 && (
+              <div className="hl">{last.highlights.map(([k, v]) => <div key={v} className="rv"><b className="d">{k}</b><span>{v}</span></div>)}</div>
+            )}
+            {last.features.length > 0 && (
+              <div className="ft rv"><small>What I built</small><ul>{last.features.map((f) => <li key={f}>{f}</li>)}</ul></div>
+            )}
+            {last.demo === "neo" && <NeoDemo />}
+            {last.gallery.length > 0 && (last.device === "phone"
+              ? <div className="phones">{last.gallery.map((g) => <div className="phone rv" key={g}><img src={g} alt={`${last.title} screen`} /></div>)}</div>
+              : <>
+                  <Frame src={last.gallery[0]} alt={last.title} />
+                  {last.gallery.length > 1 && <div className="fg">{last.gallery.slice(1).map((g) => <Frame key={g} src={g} alt={last.title} />)}</div>}
+                </>)}
           </div>
           <a className="nx" style={{ "--nbg": nx.bg, "--nfg": nx.fg } as CSSProperties} onClick={(e) => open(nx.slug, e)}>
             <div className="wrap"><small>Next project</small><h2 className="d">{nx.title}</h2></div>
