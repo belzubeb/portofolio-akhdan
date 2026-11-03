@@ -4,9 +4,9 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: { default: `Selected Work — ${SITE.name}`, template: `%s | ${SITE.name}` },
+  title: { default: SITE.title, template: `%s | ${SITE.name}` },
   description: SITE.description,
-  openGraph: { title: `Selected Work — ${SITE.name}`, description: SITE.description, type: "website" },
+  openGraph: { title: SITE.title, description: SITE.description, type: "website" },
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1, viewportFit: "cover" };
 
